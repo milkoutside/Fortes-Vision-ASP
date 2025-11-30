@@ -53,13 +53,12 @@ services:
       - fortes_net
 
   projects-frontend:
-    image: node:20.18.0
+    image: node:20.19.0
     working_dir: /app
     environment:
-      - NODE_ENV=production
       - VITE_API_PROXY_TARGET=http://projects-api:8080
     command: >
-      sh -c "npm install &&
+      sh -c "npm install --include=dev &&
       npm run build &&
       npm run preview -- --host 0.0.0.0 --port 5173 --strictPort"
     volumes:
@@ -74,13 +73,12 @@ services:
       - fortes_net
 
   employees-frontend:
-    image: node:20.18.0
+    image: node:20.19.0
     working_dir: /app
     environment:
-      - NODE_ENV=production
       - VITE_API_PROXY_TARGET=http://employees-api:8080
     command: >
-      sh -c "npm install &&
+      sh -c "npm install --include=dev &&
       npm run build &&
       npm run preview -- --host 0.0.0.0 --port 5174 --strictPort"
     volumes:
