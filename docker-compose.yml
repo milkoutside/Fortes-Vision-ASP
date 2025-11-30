@@ -8,8 +8,6 @@ services:
       - MYSQL_DATABASE=fortesdb
       - MYSQL_USER=fortes
       - MYSQL_PASSWORD=fortes_pass
-    ports:
-      - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
     healthcheck:
