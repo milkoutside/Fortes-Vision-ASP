@@ -1,8 +1,8 @@
 <script setup>
 const emit = defineEmits(['open-settings']);
 
-const PROJECTS_APP_URL = import.meta.env.VITE_PROJECTS_APP_URL ?? 'http://localhost:5173';
-const EMPLOYEES_APP_URL = import.meta.env.VITE_EMPLOYEES_APP_URL ?? 'http://localhost:5174';
+const PROJECTS_APP_URL = import.meta.env.VITE_PROJECTS_APP_URL ?? 'http://135.181.14.10:5173';
+const EMPLOYEES_APP_URL = import.meta.env.VITE_EMPLOYEES_APP_URL ?? 'http://135.181.14.10:5174';
 
 const handleSettingsClick = () => {
   emit('open-settings');
