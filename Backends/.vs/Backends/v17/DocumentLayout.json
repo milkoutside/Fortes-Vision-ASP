@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\visual test\\Fortes-Vision\\Backends\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B504D69D-6A7F-4036-87FB-D4A30FBFC6ED}|Projects.Api\\Projects.Api.csproj|d:\\visual test\\fortes-vision\\backends\\projects.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B504D69D-6A7F-4036-87FB-D4A30FBFC6ED}|Projects.Api\\Projects.Api.csproj|solutionrelative:projects.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{706F98C8-28C9-4F8F-ABBB-ED03EB0A143D}|Shared\\Shared.csproj|d:\\visual test\\fortes-vision\\backends\\shared\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{706F98C8-28C9-4F8F-ABBB-ED03EB0A143D}|Shared\\Shared.csproj|solutionrelative:shared\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\visual test\\Fortes-Vision\\Backends\\Projects.Api\\Program.cs",
+              "RelativeDocumentMoniker": "Projects.Api\\Program.cs",
+              "ToolTip": "D:\\visual test\\Fortes-Vision\\Backends\\Projects.Api\\Program.cs",
+              "RelativeToolTip": "Projects.Api\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-17T01:41:37.632Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Class1.cs",
+              "DocumentMoniker": "D:\\visual test\\Fortes-Vision\\Backends\\Shared\\Class1.cs",
+              "RelativeDocumentMoniker": "Shared\\Class1.cs",
+              "ToolTip": "D:\\visual test\\Fortes-Vision\\Backends\\Shared\\Class1.cs",
+              "RelativeToolTip": "Shared\\Class1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-17T00:23:09.051Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

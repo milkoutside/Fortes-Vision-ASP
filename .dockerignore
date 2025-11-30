@@ -1,0 +1,19 @@
+# Общие
+.git
+.gitignore
+.vs
+.vscode
+**/node_modules
+**/bin
+**/obj
+**/*.user
+**/*.suo
+**/*.swp
+**/*.tmp
+**/*.log
+
+# При копировании исходников нам не нужны локальные артефакты и IDE
+Dockerfile
+docker-compose.yml
+
+
