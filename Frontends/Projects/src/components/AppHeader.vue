@@ -3,6 +3,9 @@ import StatusPicker from './status/StatusPicker.vue';
 
 const emit = defineEmits(['open-settings', 'open-create-project']);
 
+const PROJECTS_APP_URL = import.meta.env.VITE_PROJECTS_APP_URL ?? 'http://localhost:5173';
+const EMPLOYEES_APP_URL = import.meta.env.VITE_EMPLOYEES_APP_URL ?? 'http://localhost:5174';
+
 const handleSettingsClick = () => {
   emit('open-settings');
 };
@@ -10,15 +13,33 @@ const handleSettingsClick = () => {
 const handleCreateProjectClick = () => {
   emit('open-create-project');
 };
+
+const navigateToProjects = () => {
+  window.location.href = PROJECTS_APP_URL;
+};
+
+const navigateToEmployees = () => {
+  window.location.href = EMPLOYEES_APP_URL;
+};
 </script>
 
 <template>
   <header class="app-header d-flex align-items-center gap-4 px-4 py-3 shadow-sm bg-white">
     <div class="d-flex align-items-center gap-4">
-      <a class="app-link text-decoration-none fw-semibold" href="#" rel="noopener">
+      <a
+        class="app-link text-decoration-none fw-semibold active"
+        :href="PROJECTS_APP_URL"
+        rel="noopener"
+        @click.prevent="navigateToProjects"
+      >
         Projects
       </a>
-      <a class="app-link text-decoration-none fw-semibold" href="#" rel="noopener">
+      <a
+        class="app-link text-decoration-none fw-semibold"
+        :href="EMPLOYEES_APP_URL"
+        rel="noopener"
+        @click.prevent="navigateToEmployees"
+      >
         Employees
       </a>
     </div>
@@ -55,6 +76,10 @@ const handleCreateProjectClick = () => {
 .app-link {
   color: #1f2937;
   transition: color 0.15s ease;
+}
+
+.app-link.active {
+  color: #0d6efd;
 }
 
 .app-link:hover {

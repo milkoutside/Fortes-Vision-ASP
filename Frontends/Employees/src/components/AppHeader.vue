@@ -1,35 +1,36 @@
 <script setup>
 const emit = defineEmits(['open-settings']);
 
+const PROJECTS_APP_URL = import.meta.env.VITE_PROJECTS_APP_URL ?? 'http://localhost:5173';
+const EMPLOYEES_APP_URL = import.meta.env.VITE_EMPLOYEES_APP_URL ?? 'http://localhost:5174';
+
 const handleSettingsClick = () => {
   emit('open-settings');
 };
 
 const navigateToProjects = () => {
-  // В будущем можно добавить маршрутизацию
-  window.location.href = 'http://localhost:5173'; // Projects на порту 5173
+  window.location.href = PROJECTS_APP_URL;
 };
 
 const navigateToEmployees = () => {
-  // Текущая страница, можно просто перезагрузить или ничего не делать
-  window.location.reload();
+  window.location.href = EMPLOYEES_APP_URL;
 };
 </script>
 
 <template>
   <header class="app-header">
     <div class="header-links">
-      <a 
-        class="app-link text-decoration-none fw-semibold" 
-        href="#" 
+      <a
+        class="app-link text-decoration-none fw-semibold"
+        :href="PROJECTS_APP_URL"
         rel="noopener"
         @click.prevent="navigateToProjects"
       >
         Projects
       </a>
-      <a 
-        class="app-link text-decoration-none fw-semibold active" 
-        href="#" 
+      <a
+        class="app-link text-decoration-none fw-semibold active"
+        :href="EMPLOYEES_APP_URL"
         rel="noopener"
         @click.prevent="navigateToEmployees"
       >
