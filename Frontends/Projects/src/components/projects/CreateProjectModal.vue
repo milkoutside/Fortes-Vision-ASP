@@ -137,6 +137,7 @@ const handleSubmit = async () => {
       severity: 'warn',
       summary: 'Название обязательно',
       detail: 'Введите название проекта.',
+      life: 4000,
     });
     return;
   }
@@ -146,6 +147,7 @@ const handleSubmit = async () => {
       severity: 'warn',
       summary: 'Проверьте даты',
       detail: dateError.value,
+      life: 4000,
     });
     return;
   }
@@ -166,6 +168,7 @@ const handleSubmit = async () => {
       severity: 'success',
       summary: 'Проект создан',
       detail: `«${finalProject.name}» успешно создан.`,
+      life: 3000,
     });
     internalVisible.value = false;
   } catch (error) {

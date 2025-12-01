@@ -214,6 +214,7 @@ const handleSubmit = async () => {
       severity: 'warn',
       summary: 'Название обязательно',
       detail: 'Введите название изображения.',
+      life: 4000,
     });
     return;
   }
@@ -223,6 +224,7 @@ const handleSubmit = async () => {
       severity: 'error',
       summary: 'Ошибка',
       detail: 'Изображение, батч или проект не выбран.',
+      life: 5000,
     });
     return;
   }
@@ -239,6 +241,7 @@ const handleSubmit = async () => {
       severity: 'success',
       summary: 'Изображение обновлено',
       detail: `«${form.name}» успешно обновлено.`,
+      life: 3000,
     });
     
     emit('image-updated', props.project.id, props.batch.id);

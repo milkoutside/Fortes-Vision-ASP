@@ -116,6 +116,7 @@ const handleSubmit = async () => {
       severity: 'warn',
       summary: 'Название обязательно',
       detail: 'Введите название батча.',
+      life: 4000,
     });
     return;
   }
@@ -131,6 +132,7 @@ const handleSubmit = async () => {
         summary: 'Проверьте данные',
         detail:
           'Все статусы должны быть выбраны, а длительность должна быть больше 0.',
+        life: 4000,
       });
       return;
     }
@@ -141,6 +143,7 @@ const handleSubmit = async () => {
       severity: 'error',
       summary: 'Ошибка',
       detail: 'Проект не выбран.',
+      life: 5000,
     });
     return;
   }
@@ -168,6 +171,7 @@ const handleSubmit = async () => {
       severity: 'success',
       summary: 'Батч создан',
       detail: `«${batch.name}» успешно создан.`,
+      life: 3000,
     });
     
     emit('batch-created', props.project.id);

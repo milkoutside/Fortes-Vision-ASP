@@ -42,6 +42,7 @@ const ensureStatusesLoaded = async () => {
         severity: 'error',
         summary: 'Не удалось загрузить статусы',
         detail: error.message ?? 'Попробуйте обновить страницу.',
+        life: 5000,
       });
     }
   }

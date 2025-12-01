@@ -104,6 +104,12 @@ const handleProjectClick = async (project, event) => {
 const handleContextMenu = (event, project) => {
   event.preventDefault();
   event.stopPropagation();
+  // Закрываем другие меню
+  batchContextMenuVisible.value = false;
+  imageContextMenuVisible.value = false;
+  // Закрываем меню календаря через событие
+  window.dispatchEvent(new CustomEvent('close-calendar-context-menu'));
+  
   selectedProject.value = project;
   contextMenuX.value = event.clientX;
   contextMenuY.value = event.clientY;
@@ -142,6 +148,7 @@ const handleDelete = () => {
           severity: 'success',
           summary: 'Проект удалён',
           detail: `«${projectName}» успешно удалён.`,
+          life: 3000,
         });
       } catch (error) {
         toast.add({
@@ -174,6 +181,12 @@ const isEditImageModalOpen = ref(false);
 const handleBatchContextMenu = (event, batch, project) => {
   event.preventDefault();
   event.stopPropagation();
+  // Закрываем другие меню
+  contextMenuVisible.value = false;
+  imageContextMenuVisible.value = false;
+  // Закрываем меню календаря через событие
+  window.dispatchEvent(new CustomEvent('close-calendar-context-menu'));
+  
   selectedBatch.value = batch;
   selectedBatchProject.value = project;
   batchContextMenuX.value = event.clientX;
@@ -212,6 +225,7 @@ const handleBatchDelete = () => {
           severity: 'success',
           summary: 'Батч удалён',
           detail: `«${batchName}» успешно удалён.`,
+          life: 3000,
         });
       } catch (error) {
         toast.add({
@@ -308,6 +322,12 @@ const handleBatchUpdated = async (projectId) => {
 const handleImageContextMenu = (event, image, batch, project) => {
   event.preventDefault();
   event.stopPropagation();
+  // Закрываем другие меню
+  contextMenuVisible.value = false;
+  batchContextMenuVisible.value = false;
+  // Закрываем меню календаря через событие
+  window.dispatchEvent(new CustomEvent('close-calendar-context-menu'));
+  
   selectedImage.value = image;
   selectedImageBatch.value = batch;
   selectedImageProject.value = project;
@@ -347,6 +367,7 @@ const handleImageDelete = () => {
           severity: 'success',
           summary: 'Изображение удалено',
           detail: `«${imageName}» успешно удалено.`,
+          life: 3000,
         });
       } catch (error) {
         toast.add({
@@ -402,6 +423,12 @@ const handleImageUpdated = async (projectId, batchId) => {
   }
 };
 
+const handleCloseContextMenus = () => {
+  contextMenuVisible.value = false;
+  batchContextMenuVisible.value = false;
+  imageContextMenuVisible.value = false;
+};
+
 onMounted(async () => {
   await store.dispatch('projects/fetchAll', { reset: true });
   // Привязываем обработчик скролла после следующего тика, чтобы элемент был точно отрендерен
@@ -410,6 +437,9 @@ onMounted(async () => {
       listContainer.value.addEventListener('scroll', handleScroll);
     }
   }, 0);
+  
+  // Слушаем событие закрытия меню от календаря
+  window.addEventListener('close-projects-context-menus', handleCloseContextMenus);
 });
 
 onUnmounted(() => {
@@ -419,6 +449,7 @@ onUnmounted(() => {
   if (listContainer.value) {
     listContainer.value.removeEventListener('scroll', handleScroll);
   }
+  window.removeEventListener('close-projects-context-menus', handleCloseContextMenus);
 });
 
 // Экспортируем состояние для синхронизации с CalendarCells

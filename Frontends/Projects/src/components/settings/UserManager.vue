@@ -57,6 +57,7 @@ const loadUsers = async ({ page, limit } = {}) => {
       severity: 'error',
       summary: 'Ошибка загрузки пользователей',
       detail: error.message ?? 'Не удалось получить пользователей.',
+      life: 5000,
     });
   }
 };
@@ -116,6 +117,7 @@ const handleCreateSubmit = async () => {
       severity: 'warn',
       summary: 'Проверьте данные',
       detail: 'Имя обязательно.',
+      life: 4000,
     });
     return;
   }
@@ -131,6 +133,7 @@ const handleCreateSubmit = async () => {
       severity: 'success',
       summary: 'Пользователь создан',
       detail: `«${payload.name}» добавлен.`,
+      life: 3000,
     });
     isCreateModalVisible.value = false;
     await loadUsers({ page: 1, limit: selectedPageSize.value });
@@ -139,6 +142,7 @@ const handleCreateSubmit = async () => {
       severity: 'error',
       summary: 'Не удалось создать',
       detail: error.message ?? 'Попробуйте ещё раз.',
+      life: 5000,
     });
   }
 };
@@ -157,6 +161,7 @@ const saveEditing = async () => {
       severity: 'warn',
       summary: 'Проверьте данные',
       detail: 'Имя и роль обязательны.',
+      life: 4000,
     });
     return;
   }
@@ -172,6 +177,7 @@ const saveEditing = async () => {
       severity: 'success',
       summary: 'Пользователь обновлён',
       detail: `«${payload.name}» сохранён.`,
+      life: 3000,
     });
     resetEditingRow();
   } catch (error) {
@@ -179,6 +185,7 @@ const saveEditing = async () => {
       severity: 'error',
       summary: 'Не удалось сохранить',
       detail: error.message ?? 'Попробуйте ещё раз.',
+      life: 5000,
     });
   }
 };
@@ -204,6 +211,7 @@ const confirmRemoval = (user) => {
           severity: 'success',
           summary: 'Пользователь удалён',
           detail: `«${user.name}» больше не существует.`,
+          life: 3000,
         });
         if (editingRow.id === user.id) {
           resetEditingRow();
@@ -215,6 +223,7 @@ const confirmRemoval = (user) => {
           severity: 'error',
           summary: 'Ошибка удаления',
           detail: error.message ?? 'Не удалось удалить пользователя.',
+          life: 5000,
         });
       }
     },

@@ -64,6 +64,7 @@ const ensureData = async () => {
         severity: 'error',
         summary: 'Ошибка загрузки статусов',
         detail: error.message ?? 'Не удалось получить статусы.',
+        life: 5000,
       });
     }
   }
@@ -111,6 +112,7 @@ const handleCreateSubmit = async () => {
       severity: 'success',
       summary: 'Статус создан',
       detail: `«${payload.name}» добавлен.`,
+      life: 3000,
     });
     isCreateModalVisible.value = false;
   } catch (error) {
@@ -118,6 +120,7 @@ const handleCreateSubmit = async () => {
       severity: 'error',
       summary: 'Не удалось создать статус',
       detail: error.message ?? 'Попробуйте ещё раз.',
+      life: 5000,
     });
   }
 };
@@ -134,6 +137,7 @@ const saveEditing = async () => {
       severity: 'warn',
       summary: 'Проверьте данные',
       detail: 'Название статуса обязательно.',
+      life: 4000,
     });
     return;
   }
@@ -149,6 +153,7 @@ const saveEditing = async () => {
       severity: 'success',
       summary: 'Статус обновлён',
       detail: `«${payload.name}» сохранён.`,
+      life: 3000,
     });
     resetEditingRow();
   } catch (error) {
@@ -156,6 +161,7 @@ const saveEditing = async () => {
       severity: 'error',
       summary: 'Не удалось сохранить',
       detail: error.message ?? 'Попробуйте ещё раз.',
+      life: 5000,
     });
   }
 };
@@ -179,6 +185,7 @@ const confirmRemoval = (status) => {
           severity: 'success',
           summary: 'Статус удалён',
           detail: `«${status.name}» больше не доступен.`,
+          life: 3000,
         });
         if (editingRow.id === status.id) {
           resetEditingRow();
@@ -188,6 +195,7 @@ const confirmRemoval = (status) => {
           severity: 'error',
           summary: 'Ошибка удаления',
           detail: error.message ?? 'Не удалось удалить статус.',
+          life: 5000,
         });
       }
     },

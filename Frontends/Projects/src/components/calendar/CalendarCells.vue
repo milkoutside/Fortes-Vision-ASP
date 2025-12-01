@@ -655,6 +655,9 @@ const contextMenuState = reactive({
 });
 
 const openContextMenu = (event) => {
+  // Закрываем меню ProjectsList при открытии меню календаря
+  window.dispatchEvent(new CustomEvent('close-projects-context-menus'));
+  
   contextMenuState.visible = true;
   contextMenuState.x = event.clientX;
   contextMenuState.y = event.clientY;
@@ -963,6 +966,10 @@ const handleScroll = (event) => {
   }
 };
 
+const handleCloseCalendarContextMenu = () => {
+  closeContextMenu();
+};
+
 onMounted(() => {
   if (cellsContainer.value) {
     cellsContainer.value.addEventListener('scroll', handleScroll);
@@ -975,6 +982,8 @@ onMounted(() => {
   
   window.addEventListener('click', handleDocumentClick);
   window.addEventListener('keydown', handleKeyDown);
+  // Слушаем событие закрытия меню от ProjectsList
+  window.addEventListener('close-calendar-context-menu', handleCloseCalendarContextMenu);
 
   // Синхронизируем скролл сразу и после рендеринга
   nextTick(() => {
@@ -1001,6 +1010,7 @@ onUnmounted(() => {
   window.removeEventListener('pointerup', handleGlobalPointerUp);
   window.removeEventListener('click', handleDocumentClick);
   window.removeEventListener('keydown', handleKeyDown);
+  window.removeEventListener('close-calendar-context-menu', handleCloseCalendarContextMenu);
 });
 
 defineExpose({
@@ -1269,7 +1279,7 @@ defineExpose({
 }
 
 .calendar-cells-container {
-  overflow-x: auto;
+  overflow-x: hidden;
   overflow-y: visible;
   position: relative;
   scrollbar-width: thin;

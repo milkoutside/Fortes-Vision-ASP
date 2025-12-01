@@ -185,6 +185,7 @@ const handleSubmit = async () => {
       severity: 'warn',
       summary: 'Название обязательно',
       detail: 'Введите название проекта.',
+      life: 4000,
     });
     return;
   }
@@ -194,6 +195,7 @@ const handleSubmit = async () => {
       severity: 'warn',
       summary: 'Проверьте даты',
       detail: dateError.value,
+      life: 4000,
     });
     return;
   }
@@ -203,6 +205,7 @@ const handleSubmit = async () => {
       severity: 'error',
       summary: 'Ошибка',
       detail: 'Проект не выбран.',
+      life: 5000,
     });
     return;
   }
@@ -219,6 +222,7 @@ const handleSubmit = async () => {
       severity: 'success',
       summary: 'Проект обновлён',
       detail: `«${updated.name}» успешно обновлён.`,
+      life: 3000,
     });
     internalVisible.value = false;
   } catch (error) {
@@ -366,6 +370,7 @@ form :deep(.p-calendar) {
   width: 100%;
 }
 </style>
+
 
 
 
