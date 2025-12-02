@@ -17,21 +17,32 @@ services:
       retries: 10
     networks:
       - fortes_net
-
+  
   employees-api:
     build:
       context: .
       dockerfile: dockerfiles/Employees.Api/Dockerfile
-      target: final
+      target: dev
     environment:
-      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:8080
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+      - DOTNET_WATCH_RESTART_ON_RUDE_EDIT=1
       - ConnectionStrings__DefaultConnection=server=mysql;port=3306;database=fortesdb;user=fortes;password=fortes_pass;TreatTinyAsBoolean=false
     depends_on:
       mysql:
         condition: service_healthy
     ports:
       - "5001:8080"
+    volumes:
+      - ./:/src
+      # изолировать bin/obj внутри контейнера (не использовать артефакты с хоста Windows)
+      - employees_api_bin:/src/Backends/Employees.Api/bin
+      - employees_api_obj:/src/Backends/Employees.Api/obj
+      - projects_api_bin:/src/Backends/Projects.Api/bin
+      - projects_api_obj:/src/Backends/Projects.Api/obj
+      - shared_bin:/src/Backends/Shared/bin
+      - shared_obj:/src/Backends/Shared/obj
     networks:
       - fortes_net
 
@@ -39,28 +50,41 @@ services:
     build:
       context: .
       dockerfile: dockerfiles/Projects.Api/Dockerfile
-      target: final
+      target: dev
     environment:
-      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:8080
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+      - DOTNET_WATCH_RESTART_ON_RUDE_EDIT=1
       - ConnectionStrings__DefaultConnection=server=mysql;port=3306;database=fortesdb;user=fortes;password=fortes_pass;TreatTinyAsBoolean=false
     depends_on:
       mysql:
         condition: service_healthy
     ports:
       - "5002:8080"
+    volumes:
+      - ./:/src
+      # изолировать bin/obj внутри контейнера (не использовать артефакты с хоста Windows)
+      - employees_api_bin:/src/Backends/Employees.Api/bin
+      - employees_api_obj:/src/Backends/Employees.Api/obj
+      - projects_api_bin:/src/Backends/Projects.Api/bin
+      - projects_api_obj:/src/Backends/Projects.Api/obj
+      - shared_bin:/src/Backends/Shared/bin
+      - shared_obj:/src/Backends/Shared/obj
     networks:
       - fortes_net
 
   projects-frontend:
-    image: node:20.19.0
+    image: node:20.18.0
     working_dir: /app
     environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=1
+      - WATCHPACK_POLLING=true
       - VITE_API_PROXY_TARGET=http://projects-api:8080
     command: >
-      sh -c "npm install --include=dev &&
-      npm run build &&
-      npm run preview -- --host 0.0.0.0 --port 5173 --strictPort"
+      sh -c "npm install &&
+      npm run dev -- --host 0.0.0.0 --port 5173 --strictPort"
     volumes:
       - ./Frontends/Projects:/app
       - projects_frontend_node_modules:/app/node_modules
@@ -73,14 +97,16 @@ services:
       - fortes_net
 
   employees-frontend:
-    image: node:20.19.0
+    image: node:20.18.0
     working_dir: /app
     environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=1
+      - WATCHPACK_POLLING=true
       - VITE_API_PROXY_TARGET=http://employees-api:8080
     command: >
-      sh -c "npm install --include=dev &&
-      npm run build &&
-      npm run preview -- --host 0.0.0.0 --port 5174 --strictPort"
+      sh -c "npm install &&
+      npm run dev -- --host 0.0.0.0 --port 5174 --strictPort"
     volumes:
       - ./Frontends/Employees:/app
       - employees_frontend_node_modules:/app/node_modules
@@ -115,5 +141,11 @@ networks:
 volumes:
   db_data:
     driver: local
+  employees_api_bin:
+  employees_api_obj:
+  projects_api_bin:
+  projects_api_obj:
+  shared_bin:
+  shared_obj:
   projects_frontend_node_modules:
   employees_frontend_node_modules:
