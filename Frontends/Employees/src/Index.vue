@@ -68,6 +68,7 @@ const activeFiltersCount = computed(() => {
 
 const treeScrollRef = ref(null);
 const timelineComponentRef = ref(null);
+const calendarHeaderRef = ref(null);
 let scrollSyncAttached = false;
 
 const getTimelineScrollElement = () => timelineComponentRef.value?.getScrollElement?.() ?? null;
@@ -379,6 +380,12 @@ const handleOpenSettings = () => {
   isSettingsVisible.value = true;
 };
 
+const handleScrollToToday = () => {
+  if (calendarHeaderRef.value) {
+    calendarHeaderRef.value.scrollToToday();
+  }
+};
+
 const clearFilters = () => {
   selectedFilters.value = null;
 };
@@ -397,7 +404,7 @@ onUnmounted(() => {
 
 <template>
   <div class="app-shell">
-    <AppHeader @open-settings="handleOpenSettings" />
+    <AppHeader @open-settings="handleOpenSettings" @scroll-to-today="handleScrollToToday" />
     <main class="app-main">
       <div v-if="error" class="error-banner">
         <span>Не удалось загрузить данные: {{ error.message ?? error }}</span>
@@ -448,7 +455,7 @@ onUnmounted(() => {
           </div>
         </section>
         <section class="timeline-panel">
-          <CalendarHeader />
+          <CalendarHeader ref="calendarHeaderRef" />
           <WorkloadTimeline
             ref="timelineComponentRef"
             :rows="rows"

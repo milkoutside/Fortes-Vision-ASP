@@ -1,11 +1,15 @@
 <script setup>
-const emit = defineEmits(['open-settings']);
+const emit = defineEmits(['open-settings', 'scroll-to-today']);
 
 const PROJECTS_APP_URL = import.meta.env.VITE_PROJECTS_APP_URL ?? 'http://135.181.14.10:5173';
 const EMPLOYEES_APP_URL = import.meta.env.VITE_EMPLOYEES_APP_URL ?? 'http://135.181.14.10:5174';
 
 const handleSettingsClick = () => {
   emit('open-settings');
+};
+
+const handleTodayClick = () => {
+  emit('scroll-to-today');
 };
 
 const navigateToProjects = () => {
@@ -39,6 +43,15 @@ const navigateToEmployees = () => {
     </div>
 
     <div class="spacer"></div>
+
+    <button
+      type="button"
+      class="today-btn"
+      aria-label="Today"
+      @click="handleTodayClick"
+    >
+      Today
+    </button>
 
     <button
       type="button"
@@ -87,6 +100,31 @@ const navigateToEmployees = () => {
 .app-link.active {
   color: #0f172a;
   font-weight: 700;
+}
+
+.today-btn {
+  padding: 0.5rem 1rem;
+  background-color: #0ea5e9;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.today-btn:hover {
+  background-color: #38bdf8;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(14, 165, 233, 0.3);
+}
+
+.today-btn:active {
+  transform: translateY(0);
 }
 
 .settings-btn {

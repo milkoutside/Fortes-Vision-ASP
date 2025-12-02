@@ -10,7 +10,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="891fffff-483a-4019-9182-c2fc724764cb" name="Changes" comment="" />
+    <list default="true" id="891fffff-483a-4019-9182-c2fc724764cb" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Backends/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Backends/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Employees.Api/obj/Debug/net8.0/Employees.Api.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Employees.Api/obj/Debug/net8.0/Employees.Api.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Employees.Api/obj/Debug/net8.0/Employees.Api.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Employees.Api/obj/Debug/net8.0/Employees.Api.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects.Api/obj/Debug/net8.0/Projects.Api.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Projects.Api/obj/Debug/net8.0/Projects.Api.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects.Api/obj/Debug/net8.0/Projects.Api.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Projects.Api/obj/Debug/net8.0/Projects.Api.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shared/obj/Debug/net8.0/Shared.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/obj/Debug/net8.0/Shared.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shared/obj/Debug/net8.0/Shared.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/obj/Debug/net8.0/Shared.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frontends/Projects/src/components/projects/BatchContextMenu.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontends/Projects/src/components/projects/BatchContextMenu.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frontends/Projects/src/components/projects/ImageContextMenu.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontends/Projects/src/components/projects/ImageContextMenu.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frontends/Projects/src/repositories/imagesRepository.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontends/Projects/src/repositories/imagesRepository.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frontends/Projects/src/repositories/tasksRepository.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontends/Projects/src/repositories/tasksRepository.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,22 +44,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Launch Settings Profile.Projects.Api: http.executor": "Run",
-    "ATTACH_DIALOG_SELECTED_CONTAINER": "fortes-vision-employees-api-1",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Launch Settings Profile.Projects.Api: http.executor&quot;: &quot;Run&quot;,
+    &quot;ATTACH_DIALOG_SELECTED_CONTAINER&quot;: &quot;fortes-vision-employees-api-1&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected=".NET Launch Settings Profile.Projects.Api: http">
     <configuration name="Employees.Api: IIS Express" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Employees.Api/Employees.Api.csproj" />
@@ -125,6 +139,8 @@
       <workItem from="1764463753601" duration="8545000" />
       <workItem from="1764496648100" duration="1522000" />
       <workItem from="1764518094583" duration="6260000" />
+      <workItem from="1764586520331" duration="1322000" />
+      <workItem from="1764610196117" duration="1277000" />
     </task>
     <servers />
   </component>

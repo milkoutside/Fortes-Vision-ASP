@@ -139,18 +139,44 @@ const goToNextThreeMonths = async (fromAuto = false) => {
   }, 400);
 };
 
-const scrollToToday = () => {
+const scrollToToday = async () => {
+  const today = store.getters['calendar/today'];
+  const allDates = threeMonthsData.value.flatMap(month => month.dates);
+  
+  // Проверяем, находится ли сегодняшняя дата в текущем диапазоне
+  const isTodayInRange = allDates.includes(today);
+  
+  // Если сегодняшняя дата не в диапазоне, переключаем календарь на текущий месяц
+  if (!isTodayInRange) {
+    isAutoNavigating.value = true;
+    await store.dispatch('calendar/goToToday');
+    await nextTick();
+    // Ждем немного, чтобы DOM обновился
+    await new Promise(resolve => setTimeout(resolve, 100));
+    isAutoNavigating.value = false;
+  }
+  
   const header = getHeaderEl();
   if (!header) return;
 
+  // Пытаемся найти ячейку с сегодняшней датой
   const todayCell = header.querySelector('.date-cell.today');
-  if (!todayCell) return;
+  if (!todayCell) {
+    // Если ячейка все еще не найдена, ждем еще немного
+    await nextTick();
+    await new Promise(resolve => setTimeout(resolve, 200));
+    const retryCell = header.querySelector('.date-cell.today');
+    if (!retryCell) return;
+  }
+
+  const finalCell = todayCell || header.querySelector('.date-cell.today');
+  if (!finalCell) return;
 
   const headerRect = header.getBoundingClientRect();
-  const cellRect = todayCell.getBoundingClientRect();
+  const cellRect = finalCell.getBoundingClientRect();
   const cellLeftWithinHeader = cellRect.left - headerRect.left + header.scrollLeft;
   const headerWidth = header.clientWidth;
-  const cellWidth = todayCell.offsetWidth;
+  const cellWidth = finalCell.offsetWidth;
   const targetScrollLeft = Math.max(0, cellLeftWithinHeader - (headerWidth - cellWidth) / 2);
 
   isProgrammaticScroll.value = true;

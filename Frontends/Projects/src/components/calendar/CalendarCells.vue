@@ -500,6 +500,11 @@ const getCellTooltip = (imageData, date) => {
   return formatUsersTooltip(users);
 };
 
+const getUsersCount = (imageData, date) => {
+  const users = getTaskUsers(imageData, date);
+  return users.length;
+};
+
 // Группировка смежных ячеек через выходные
 // Находит все ячейки, связанные с данной ячейкой через задачу того же статуса
 // ВАЖНО: 
@@ -1101,10 +1106,14 @@ defineExpose({
               @contextmenu="handleCellContextMenu($event, item, date)"
             >
               <div class="cell-content">
+                <div v-if="getUsersCount(item.data, date) > 0" class="cell-users-count">
+                  {{ getUsersCount(item.data, date) }}
+                </div>
                 <i
                   v-if="!isWeekend(date) && getTaskForImageDate(item.data, date)?.completed"
                   class="pi pi-check cell-complete-icon"
                   title="Задача завершена"
+                  style="align-self: flex-start;"
                 ></i>
               </div>
             </div>
@@ -1361,6 +1370,7 @@ defineExpose({
   cursor: pointer;
   transition: background-color 0.15s ease, border-color 0.15s ease;
   flex-shrink: 0;
+  user-select: none;
 }
 
 .cell:hover {
@@ -1414,10 +1424,29 @@ defineExpose({
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
+  justify-content: space-between;
+  align-items: flex-end;
   padding: 6px;
   box-sizing: border-box;
+  user-select: none;
+  pointer-events: none;
+}
+
+.cell-users-count {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  user-select: none;
+  pointer-events: none;
+}
+
+.cell.has-task .cell-users-count {
+  color: #ffffff;
 }
 
 .cell-complete-icon {
