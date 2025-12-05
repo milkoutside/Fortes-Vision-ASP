@@ -30,14 +30,14 @@ const internalVisible = computed({
     :style="{ width: '100vw', maxWidth: '100vw', height: '100vh', maxHeight: '100vh', margin: 0, top: 0 }"
     :contentStyle="{ height: 'calc(100vh - 80px)', overflow: 'auto' }"
   >
-    <Tabs lazy class="settings-tabs">
-      <Tab header="Статусы">
+    <TabView lazy class="settings-tabs">
+      <TabPanel header="Статусы">
         <StatusManager />
-      </Tab>
-      <Tab header="Пользователи">
+      </TabPanel>
+      <TabPanel header="Пользователи">
         <UserManager />
-      </Tab>
-    </Tabs>
+      </TabPanel>
+    </TabView>
   </Dialog>
 </template>
 

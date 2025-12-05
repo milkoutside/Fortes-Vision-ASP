@@ -27,7 +27,7 @@ const internalVisible = computed({
     dismissableMask
     class="settings-dialog"
     :style="{ width: '100vw', maxWidth: '100vw', height: '100vh', maxHeight: '100vh', margin: 0, top: 0 }"
-    :contentStyle="{ height: 'calc(100vh - 80px)', overflow: 'auto' }"
+    :contentStyle="{ height: 'calc(100vh - 80px)', overflow: 'auto', padding: 0 }"
   >
     <UserManager />
   </Dialog>
@@ -43,6 +43,10 @@ const internalVisible = computed({
   top: 0 !important;
   left: 0 !important;
   border-radius: 0 !important;
+}
+
+.settings-dialog :deep(.p-dialog-content) {
+  padding: 0 !important;
 }
 
 .settings-dialog :deep(.p-dialog-header) {

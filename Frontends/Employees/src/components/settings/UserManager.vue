@@ -229,9 +229,9 @@ const handlePageChange = (event) => {
 </script>
 
 <template>
-  <section class="user-manager container-fluid py-3 h-100 d-flex flex-column">
-    <div class="card shadow-sm border-0 rounded-4 flex-grow-1 d-flex flex-column">
-      <div class="card-body d-flex flex-column flex-grow-1" style="min-height: 0;">
+  <section class="user-manager container-fluid px-0 py-3">
+    <div class="card shadow-sm border-0 rounded-4">
+      <div class="card-body d-flex flex-column">
         <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3 mb-3">
           <div>
             <h5 class="mb-1">Список пользователей</h5>
@@ -270,8 +270,8 @@ const handlePageChange = (event) => {
           :loading="isLoading"
           dataKey="id"
           scrollable
-          scrollHeight="100%"
-          class="flex-grow-1 user-table"
+          scrollHeight="420px"
+          class="flex-grow-1"
         >
           <Column field="name" header="Имя">
             <template #body="{ data }">
@@ -424,6 +424,11 @@ const handlePageChange = (event) => {
   text-transform: capitalize;
 }
 
+.user-manager {
+  padding-left: 0;
+  padding-right: 0;
+}
+
 .control-toolbar > * {
   min-height: 36px;
 }
@@ -461,30 +466,6 @@ const handlePageChange = (event) => {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-}
-
-.user-manager {
-  min-height: 0;
-}
-
-.user-table {
-  min-height: 0;
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
-}
-
-.user-table :deep(.p-datatable-wrapper) {
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
-}
-
-.user-table :deep(.p-datatable-table-wrapper) {
-  flex: 1 1 auto;
-  overflow: auto;
-  min-height: 0;
 }
 </style>
 

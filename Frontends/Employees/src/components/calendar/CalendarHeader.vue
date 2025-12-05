@@ -44,6 +44,7 @@ const leftProgress = ref(0);
 const rightProgress = ref(0);
 
 const clamp01 = (v) => Math.max(0, Math.min(1, v));
+const waitForFrame = () => new Promise((resolve) => requestAnimationFrame(() => resolve()));
 
 const getHeaderEl = () => calendarHeader.value;
 
@@ -139,71 +140,76 @@ const goToNextThreeMonths = async (fromAuto = false) => {
   }, 400);
 };
 
-const scrollToToday = async () => {
+const ensureTodayInRange = async () => {
   const today = store.getters['calendar/today'];
-  const allDates = threeMonthsData.value.flatMap(month => month.dates);
-  
-  // Проверяем, находится ли сегодняшняя дата в текущем диапазоне
-  const isTodayInRange = allDates.includes(today);
-  
-  // Если сегодняшняя дата не в диапазоне, переключаем календарь на текущий месяц
-  if (!isTodayInRange) {
-    isAutoNavigating.value = true;
+  const allDates = threeMonthsData.value.flatMap((month) => month.dates);
+  if (allDates.includes(today)) return;
+
+  isAutoNavigating.value = true;
+  try {
     await store.dispatch('calendar/goToToday');
     await nextTick();
-    // Ждем немного, чтобы DOM обновился
-    await new Promise(resolve => setTimeout(resolve, 150));
+    await waitForFrame();
+  } finally {
     isAutoNavigating.value = false;
   }
-  
+};
+
+const findTodayCell = async () => {
+  const header = getHeaderEl();
+  if (!header) return null;
+
+  for (let attempt = 0; attempt < 4; attempt += 1) {
+    const cell = header.querySelector('.date-cell.today');
+    if (cell) return cell;
+    await nextTick();
+    await waitForFrame();
+  }
+
+  return null;
+};
+
+const scrollToToday = async () => {
+  await ensureTodayInRange();
+
   const header = getHeaderEl();
   if (!header) return;
 
-  // Пытаемся найти ячейку с сегодняшней датой
-  let todayCell = header.querySelector('.date-cell.today');
-  if (!todayCell) {
-    // Если ячейка все еще не найдена, ждем еще немного
-    await nextTick();
-    await new Promise(resolve => setTimeout(resolve, 200));
-    todayCell = header.querySelector('.date-cell.today');
-    if (!todayCell) return;
-  }
+  const finalCell = await findTodayCell();
+  if (!finalCell) return;
 
-  // Используем простой и надежный способ расчета позиции
-  // Используем getBoundingClientRect для точного расчета позиции
+  await waitForFrame();
+
   const headerRect = header.getBoundingClientRect();
-  const cellRect = todayCell.getBoundingClientRect();
-  
-  // Вычисляем позицию ячейки относительно header с учетом текущего scrollLeft
-  // cellRect.left - headerRect.left дает позицию относительно видимой области
-  // добавляем header.scrollLeft чтобы получить абсолютную позицию
-  const cellOffsetLeft = cellRect.left - headerRect.left + header.scrollLeft;
-
+  const cellRect = finalCell.getBoundingClientRect();
+  const cellLeftWithinHeader = cellRect.left - headerRect.left + header.scrollLeft;
   const headerWidth = header.clientWidth;
-  const cellWidth = todayCell.offsetWidth;
-  const targetScrollLeft = Math.max(0, Math.min(
-    cellOffsetLeft - (headerWidth - cellWidth) / 2,
-    header.scrollWidth - headerWidth
-  ));
+  const cellWidth = finalCell.offsetWidth;
+  const targetScrollLeft = Math.max(0, cellLeftWithinHeader - (headerWidth - cellWidth) / 2);
 
-  // Устанавливаем флаг перед скроллом, чтобы другие обработчики не мешали
   isProgrammaticScroll.value = true;
-  
-  // Используем мгновенный скролл для надежности и быстродействия
-  // Это решает проблему с медленным "черепашьим" движением при использовании smooth scroll
-  header.scrollLeft = targetScrollLeft;
-  
-  // Синхронизируем с timeline сразу после скролла
-  await nextTick();
   const calendarCells = document.querySelector('.images-virtual-container');
+  header.scrollTo({
+    left: targetScrollLeft,
+    behavior: 'smooth',
+  });
+
   if (calendarCells) {
-    calendarCells.scrollLeft = targetScrollLeft;
+    calendarCells.scrollTo({
+      left: targetScrollLeft,
+      behavior: 'smooth',
+    });
   }
-  
-  // Сбрасываем флаг после небольшой задержки
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      isProgrammaticScroll.value = false;
+    });
+  });
+
   setTimeout(() => {
     isProgrammaticScroll.value = false;
-  }, 100);
+  }, 400);
 };
 
 const resetScrollToStart = () => {
