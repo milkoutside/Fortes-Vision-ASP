@@ -152,7 +152,7 @@ const scrollToToday = async () => {
     await store.dispatch('calendar/goToToday');
     await nextTick();
     // Ждем немного, чтобы DOM обновился
-    await new Promise(resolve => setTimeout(resolve, 100));
+    await new Promise(resolve => setTimeout(resolve, 150));
     isAutoNavigating.value = false;
   }
   
@@ -160,34 +160,50 @@ const scrollToToday = async () => {
   if (!header) return;
 
   // Пытаемся найти ячейку с сегодняшней датой
-  const todayCell = header.querySelector('.date-cell.today');
+  let todayCell = header.querySelector('.date-cell.today');
   if (!todayCell) {
     // Если ячейка все еще не найдена, ждем еще немного
     await nextTick();
     await new Promise(resolve => setTimeout(resolve, 200));
-    const retryCell = header.querySelector('.date-cell.today');
-    if (!retryCell) return;
+    todayCell = header.querySelector('.date-cell.today');
+    if (!todayCell) return;
   }
 
-  const finalCell = todayCell || header.querySelector('.date-cell.today');
-  if (!finalCell) return;
-
+  // Используем простой и надежный способ расчета позиции
+  // Используем getBoundingClientRect для точного расчета позиции
   const headerRect = header.getBoundingClientRect();
-  const cellRect = finalCell.getBoundingClientRect();
-  const cellLeftWithinHeader = cellRect.left - headerRect.left + header.scrollLeft;
+  const cellRect = todayCell.getBoundingClientRect();
+  
+  // Вычисляем позицию ячейки относительно header с учетом текущего scrollLeft
+  // cellRect.left - headerRect.left дает позицию относительно видимой области
+  // добавляем header.scrollLeft чтобы получить абсолютную позицию
+  const cellOffsetLeft = cellRect.left - headerRect.left + header.scrollLeft;
+
   const headerWidth = header.clientWidth;
-  const cellWidth = finalCell.offsetWidth;
-  const targetScrollLeft = Math.max(0, cellLeftWithinHeader - (headerWidth - cellWidth) / 2);
+  const cellWidth = todayCell.offsetWidth;
+  const targetScrollLeft = Math.max(0, Math.min(
+    cellOffsetLeft - (headerWidth - cellWidth) / 2,
+    header.scrollWidth - headerWidth
+  ));
 
+  // Устанавливаем флаг перед скроллом, чтобы другие обработчики не мешали
   isProgrammaticScroll.value = true;
-  header.scrollTo({
-    left: targetScrollLeft,
-    behavior: 'smooth',
-  });
-
+  
+  // Используем мгновенный скролл для надежности и быстродействия
+  // Это решает проблему с медленным "черепашьим" движением при использовании smooth scroll
+  header.scrollLeft = targetScrollLeft;
+  
+  // Синхронизируем с timeline сразу после скролла
+  await nextTick();
+  const calendarCells = document.querySelector('.images-virtual-container');
+  if (calendarCells) {
+    calendarCells.scrollLeft = targetScrollLeft;
+  }
+  
+  // Сбрасываем флаг после небольшой задержки
   setTimeout(() => {
     isProgrammaticScroll.value = false;
-  }, 400);
+  }, 100);
 };
 
 const resetScrollToStart = () => {

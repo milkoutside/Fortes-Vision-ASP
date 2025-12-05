@@ -2,9 +2,9 @@
 import { computed, onBeforeUnmount, reactive, ref, watch } from 'vue';
 import { useStore } from 'vuex';
 import { useToast } from 'primevue/usetoast';
-import Calendar from 'primevue/calendar';
+import DatePicker from 'primevue/datepicker';
 import MultiSelect from 'primevue/multiselect';
-import InputSwitch from 'primevue/inputswitch';
+import ToggleSwitch from 'primevue/toggleswitch';
 
 const props = defineProps({
   visible: {
@@ -209,7 +209,7 @@ const handleSubmit = async () => {
         <div class="col-md-4">
           <label class="form-label fw-semibold d-block">Статус</label>
           <div class="d-flex align-items-center gap-2">
-            <InputSwitch inputId="create-project-active" v-model="form.isActive" />
+            <ToggleSwitch inputId="create-project-active" v-model="form.isActive" />
             <label class="mb-0 text-muted" for="create-project-active">
               {{ form.isActive ? 'Активен' : 'Приостановлен' }}
             </label>
@@ -220,7 +220,7 @@ const handleSubmit = async () => {
       <div class="row g-3">
         <div class="col-md-6">
           <label class="form-label fw-semibold">Дата начала</label>
-          <Calendar
+          <DatePicker
             v-model="form.startDate"
             showIcon
             iconDisplay="input"
@@ -231,7 +231,7 @@ const handleSubmit = async () => {
         </div>
         <div class="col-md-6">
           <label class="form-label fw-semibold">Дата окончания</label>
-          <Calendar
+          <DatePicker
             v-model="form.endDate"
             showIcon
             iconDisplay="input"
@@ -255,7 +255,7 @@ const handleSubmit = async () => {
         </div>
         <div class="col-md-6">
           <label class="form-label fw-semibold">Тип дедлайна</label>
-          <Dropdown
+          <Select
             v-model="form.deadlineType"
             :options="deadlineOptions"
             optionLabel="label"
@@ -311,8 +311,8 @@ const handleSubmit = async () => {
 
 form :deep(.p-inputtext),
 form :deep(.p-multiselect),
-form :deep(.p-dropdown),
-form :deep(.p-calendar) {
+form :deep(.p-select),
+form :deep(.p-datepicker) {
   width: 100%;
 }
 </style>

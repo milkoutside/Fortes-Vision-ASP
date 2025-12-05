@@ -1205,7 +1205,7 @@ defineExpose({
       <div class="row g-3">
         <div class="col-md-6">
           <label class="form-label">Фильтр по роли</label>
-          <Dropdown
+          <Select
             v-model="attachUsersDialog.roleFilter"
             :options="roleFilterOptions"
             optionLabel="label"

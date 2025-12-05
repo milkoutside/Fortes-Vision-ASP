@@ -323,7 +323,7 @@ const handleSubmit = async () => {
             <div class="flex-grow-1 d-flex gap-3">
               <div class="flex-grow-1">
                 <label class="form-label small mb-1">Статус</label>
-                <Dropdown
+                <Select
                   v-model="statusDuration.status"
                   :options="statuses"
                   optionLabel="name"
@@ -407,7 +407,7 @@ const handleSubmit = async () => {
 }
 
 form :deep(.p-inputtext),
-form :deep(.p-dropdown),
+form :deep(.p-select),
 form :deep(.p-inputnumber) {
   width: 100%;
 }

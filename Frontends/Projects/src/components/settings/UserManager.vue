@@ -255,7 +255,7 @@ const handlePageChange = (event) => {
                 class="flex-grow-1 border-0 shadow-none"
               />
             </div>
-            <Dropdown
+            <Select
               v-model="roleFilter"
               :options="roleFilterOptions"
               optionLabel="label"
@@ -298,7 +298,7 @@ const handlePageChange = (event) => {
           <Column field="role" header="Роль">
             <template #body="{ data }">
               <div v-if="editingRow.id === data.id" class="inline-input">
-                <Dropdown
+                <Select
                   v-model="editingRow.role"
                   :options="ROLE_OPTIONS"
                   optionLabel="label"
@@ -394,7 +394,7 @@ const handlePageChange = (event) => {
 
         <div>
           <label class="form-label fw-semibold">Роль</label>
-          <Dropdown
+          <Select
             v-model="createForm.role"
             :options="ROLE_OPTIONS"
             optionLabel="label"
@@ -451,7 +451,7 @@ const handlePageChange = (event) => {
 }
 
 .inline-input :deep(.p-inputtext),
-.inline-input :deep(.p-dropdown) {
+.inline-input :deep(.p-select) {
   width: 100%;
 }
 
@@ -459,7 +459,7 @@ const handlePageChange = (event) => {
   min-width: 200px;
 }
 
-.role-filter :deep(.p-dropdown) {
+.role-filter :deep(.p-select) {
   width: 100%;
   min-height: 36px;
 }

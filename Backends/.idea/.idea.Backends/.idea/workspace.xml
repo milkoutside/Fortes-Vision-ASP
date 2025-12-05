@@ -10,20 +10,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="891fffff-483a-4019-9182-c2fc724764cb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Backends/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Backends/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Employees.Api/obj/Debug/net8.0/Employees.Api.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Employees.Api/obj/Debug/net8.0/Employees.Api.AssemblyInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Employees.Api/obj/Debug/net8.0/Employees.Api.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Employees.Api/obj/Debug/net8.0/Employees.Api.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects.Api/obj/Debug/net8.0/Projects.Api.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Projects.Api/obj/Debug/net8.0/Projects.Api.AssemblyInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects.Api/obj/Debug/net8.0/Projects.Api.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Projects.Api/obj/Debug/net8.0/Projects.Api.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shared/obj/Debug/net8.0/Shared.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/obj/Debug/net8.0/Shared.AssemblyInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shared/obj/Debug/net8.0/Shared.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Shared/obj/Debug/net8.0/Shared.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frontends/Projects/src/components/projects/BatchContextMenu.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontends/Projects/src/components/projects/BatchContextMenu.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frontends/Projects/src/components/projects/ImageContextMenu.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontends/Projects/src/components/projects/ImageContextMenu.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frontends/Projects/src/repositories/imagesRepository.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontends/Projects/src/repositories/imagesRepository.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frontends/Projects/src/repositories/tasksRepository.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontends/Projects/src/repositories/tasksRepository.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
-    </list>
+    <list default="true" id="891fffff-483a-4019-9182-c2fc724764cb" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -141,6 +128,7 @@
       <workItem from="1764518094583" duration="6260000" />
       <workItem from="1764586520331" duration="1322000" />
       <workItem from="1764610196117" duration="1277000" />
+      <workItem from="1764666256041" duration="1642000" />
     </task>
     <servers />
   </component>

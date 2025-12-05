@@ -229,9 +229,9 @@ const handlePageChange = (event) => {
 </script>
 
 <template>
-  <section class="user-manager container-fluid py-3">
-    <div class="card shadow-sm border-0 rounded-4">
-      <div class="card-body d-flex flex-column">
+  <section class="user-manager container-fluid py-3 h-100 d-flex flex-column">
+    <div class="card shadow-sm border-0 rounded-4 flex-grow-1 d-flex flex-column">
+      <div class="card-body d-flex flex-column flex-grow-1" style="min-height: 0;">
         <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3 mb-3">
           <div>
             <h5 class="mb-1">Список пользователей</h5>
@@ -246,7 +246,7 @@ const handlePageChange = (event) => {
                 class="flex-grow-1 border-0 shadow-none"
               />
             </div>
-            <Dropdown
+            <Select
               v-model="roleFilter"
               :options="roleFilterOptions"
               optionLabel="label"
@@ -270,8 +270,8 @@ const handlePageChange = (event) => {
           :loading="isLoading"
           dataKey="id"
           scrollable
-          scrollHeight="420px"
-          class="flex-grow-1"
+          scrollHeight="100%"
+          class="flex-grow-1 user-table"
         >
           <Column field="name" header="Имя">
             <template #body="{ data }">
@@ -289,7 +289,7 @@ const handlePageChange = (event) => {
           <Column field="role" header="Роль">
             <template #body="{ data }">
               <div v-if="editingRow.id === data.id" class="inline-input">
-                <Dropdown
+                <Select
                   v-model="editingRow.role"
                   :options="ROLE_OPTIONS"
                   optionLabel="label"
@@ -385,7 +385,7 @@ const handlePageChange = (event) => {
 
         <div>
           <label class="form-label fw-semibold">Роль</label>
-          <Dropdown
+          <Select
             v-model="createForm.role"
             :options="ROLE_OPTIONS"
             optionLabel="label"
@@ -442,7 +442,7 @@ const handlePageChange = (event) => {
 }
 
 .inline-input :deep(.p-inputtext),
-.inline-input :deep(.p-dropdown) {
+.inline-input :deep(.p-select) {
   width: 100%;
 }
 
@@ -450,7 +450,7 @@ const handlePageChange = (event) => {
   min-width: 200px;
 }
 
-.role-filter :deep(.p-dropdown) {
+.role-filter :deep(.p-select) {
   width: 100%;
   min-height: 36px;
 }
@@ -461,6 +461,30 @@ const handlePageChange = (event) => {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+
+.user-manager {
+  min-height: 0;
+}
+
+.user-table {
+  min-height: 0;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-table :deep(.p-datatable-wrapper) {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.user-table :deep(.p-datatable-table-wrapper) {
+  flex: 1 1 auto;
+  overflow: auto;
+  min-height: 0;
 }
 </style>
 
